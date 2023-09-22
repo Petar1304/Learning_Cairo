@@ -43,8 +43,28 @@ commands:
 - Desnap operator: `*` converts snapshot back into a regular value (opposite of the `@` operator)
 
 ### Arrays:
+- from `array::ArrayTrait`
+- You can only append items to the end of an array using `append` and remove items from the front using `pop_front`, you can not change values in the array
+
+- creating an array: `ArrayTrait::new()` or `ArrayTrait::<u128>::new()`
+- getting elements from array: 
+    - `array.at(index)` -> returns a snapshot to the element at specified index using `unbox()` operator to extract value stored in a box.
+    - `array.get(index)` -> returns an `Option<Box<@T>>` box type containing a snapshot to the element at the specified index, if element exists returns `Some(Box<@T>)` or if element doesn't exist returns `None`.
+
+- **Span** is a struct that represents a snapshot of an `Array`, used for read-only operations on an array. To create span call `array.span()` method.
+
+### Dictionaries:
 
 
+
+### Enums:
+- Result enum:
+```
+enum Result<T, E> {
+    Ok: T,
+    Err: E,
+}
+```
 
 ### Tests:
 - Unit tests: `#[cfg(test)]`  run with `scarb cairo-test`
