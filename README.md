@@ -28,6 +28,9 @@ commands:
 - A module is a named container for items such as structs, enums, functions, constants, and traits.
 - A crate is a single compilation unit. It has a root directory, and a root module defined at the file lib.cairo under this directory.
 
+### Control Flow:
+- returning values from loops: `break value`
+
 ### Ownership, References and Snapshots:
 - At any given time, a variable can only have one owner.
 - You can pass a variable by-value, by-snapshot, or by-reference to a function.
@@ -37,6 +40,34 @@ commands:
 
 - `#[derive(Copy, Drop)` Drop trait -> value cannot go out of scope unless it has been previously moved.
 - `Destruct` trait -> allows values to automatically be `squashed` when they go out of scope (must be used every time dictionary is used inside some struct)
+- Desnap operator: `*` converts snapshot back into a regular value (opposite of the `@` operator)
+
+### Arrays:
+
+
+
+### Tests:
+- Unit tests: `#[cfg(test)]`  run with `scarb cairo-test`
+```
+#[cfg(test)]
+mod tests {
+    #[test]
+    #[available_gas(2000000)]
+    fn it_works() {
+        assert(1 == 1, '1 != 1');
+    }
+}
+```
+
+### Macros:
+- `array![1, 2, 3]`
+- `const a: felt252 = consteval_int!(2 * 2 * 2);`
+
+### Errors:
+- `panic`
+- `panic_with_felt242()`
+- nopanic functions (can be only called from other nopanic functions)
+`fn function_never_panics() nopanic {}`
 
 
 
