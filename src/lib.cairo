@@ -1,1 +1,1 @@
-mod arrays;
+mod dictionaries;

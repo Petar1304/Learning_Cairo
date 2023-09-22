@@ -1,8 +1,10 @@
 # Learning Cairo
 
+
 ## TODO:
 1. Prvi podprogram treba da ima dva ulaza dve liste ID-jeva, i da funkcija vrati da li postoji presek ta dva niza
 2. Drugi tip podpograma bi trebalo da proveri ispunjenost nekog algebarskog uslova (da li je ulaz1 veci za 10% od drugog ulaza)
+
 
 ## Scarb
 commands:
@@ -11,7 +13,9 @@ commands:
 - `scarb cairo-run`
 - `scarb cairo-run --available-gas=10000` (when using loops)
 
+
 ## Cairo
+
 
 ### Data Types:
 - Boolean(bool)
@@ -20,16 +24,20 @@ commands:
 - Numeric types: felt252 (used to represent a field element) and integers
 - Short String: max length of 31 chars stored in felt252
 
+
 ### Type Casting:
 - `.try_into()` safe type casting, returns Option<T>, which needs to be unwraped
 - `.into()` 
+
 
 ### Modules and Creates:
 - A module is a named container for items such as structs, enums, functions, constants, and traits.
 - A crate is a single compilation unit. It has a root directory, and a root module defined at the file lib.cairo under this directory.
 
+
 ### Control Flow:
 - returning values from loops: `break value`
+
 
 ### Ownership, References and Snapshots:
 - At any given time, a variable can only have one owner.
@@ -42,6 +50,7 @@ commands:
 - `Destruct` trait -> allows values to automatically be `squashed` when they go out of scope (must be used every time dictionary is used inside some struct)
 - Desnap operator: `*` converts snapshot back into a regular value (opposite of the `@` operator)
 
+
 ### Arrays:
 - from `array::ArrayTrait`
 - You can only append items to the end of an array using `append` and remove items from the front using `pop_front`, you can not change values in the array
@@ -53,8 +62,13 @@ commands:
 
 - **Span** is a struct that represents a snapshot of an `Array`, used for read-only operations on an array. To create span call `array.span()` method.
 
-### Dictionaries:
 
+### Dictionaries:
+- `Felt252Dict<T>`
+- keys are restricted to `felt252`
+- operations:
+    - `insert(felt252, T) -> ()` to write values to a dictionary
+    - `get(felt252) -> T` to read values from it
 
 
 ### Enums:
@@ -65,6 +79,7 @@ enum Result<T, E> {
     Err: E,
 }
 ```
+
 
 ### Tests:
 - Unit tests: `#[cfg(test)]`  run with `scarb cairo-test`
@@ -79,9 +94,11 @@ mod tests {
 }
 ```
 
+
 ### Macros:
 - `array![1, 2, 3]`
 - `const a: felt252 = consteval_int!(2 * 2 * 2);`
+
 
 ### Errors:
 - `panic`
