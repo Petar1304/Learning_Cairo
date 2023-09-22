@@ -9,6 +9,7 @@ commands:
 - `scarb new hello_world`
 - `scarb build`
 - `scarb cairo-run`
+- `scarb cairo-run --available-gas=10000` (when using loops)
 
 ## Cairo
 
@@ -26,6 +27,16 @@ commands:
 ### Modules and Creates:
 - A module is a named container for items such as structs, enums, functions, constants, and traits.
 - A crate is a single compilation unit. It has a root directory, and a root module defined at the file lib.cairo under this directory.
+
+### Ownership, References and Snapshots:
+- At any given time, a variable can only have one owner.
+- You can pass a variable by-value, by-snapshot, or by-reference to a function.
+- If you pass-by-value, ownership of the variable is transferred to the function.
+- If you want to keep ownership of the variable and know that your function won’t mutate it, you can pass it as a snapshot with `@`.
+- If you want to keep ownership of the variable and know that your function will mutate it, you can pass it as a mutable reference with `ref`.
+
+- `#[derive(Copy, Drop)` Drop trait -> value cannot go out of scope unless it has been previously moved.
+- `Destruct` trait -> allows values to automatically be `squashed` when they go out of scope (must be used every time dictionary is used inside some struct)
 
 
 
