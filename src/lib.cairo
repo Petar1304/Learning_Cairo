@@ -1,1 +1,1 @@
-mod dictionaries;
+mod enums;

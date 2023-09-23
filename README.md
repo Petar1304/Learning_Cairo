@@ -1,20 +1,11 @@
 # Learning Cairo
 
-
-## TODO:
-1. Prvi podprogram treba da ima dva ulaza dve liste ID-jeva, i da funkcija vrati da li postoji presek ta dva niza
-2. Drugi tip podpograma bi trebalo da proveri ispunjenost nekog algebarskog uslova (da li je ulaz1 veci za 10% od drugog ulaza)
-
-
-## Scarb
+### Scarb:
 commands:
 - `scarb new hello_world`
 - `scarb build`
 - `scarb cairo-run`
 - `scarb cairo-run --available-gas=10000` (when using loops)
-
-
-## Cairo
 
 
 ### Data Types:
@@ -81,6 +72,32 @@ enum Result<T, E> {
 ```
 
 
+### Structs and methods:
+```
+use debug::PrintTrait;
+#[derive(Copy, Drop)]
+struct Rectangle {
+    width: u64,
+    height: u64,
+}
+
+trait RectangleTrait {
+    fn area(self: @Rectangle) -> u64;
+}
+
+impl RectangleImpl of RectangleTrait {
+    fn area(self: @Rectangle) -> u64 {
+        (*self.width) * (*self.height)
+    }
+}
+
+fn main() {
+    let rect1 = Rectangle { width: 30, height: 50, };
+    rect1.area().print();
+}
+```
+
+
 ### Tests:
 - Unit tests: `#[cfg(test)]`  run with `scarb cairo-test`
 ```
@@ -107,5 +124,11 @@ mod tests {
 `fn function_never_panics() nopanic {}`
 
 
-
+### Derivable Traits:
+`#[derive(Copy, Drop)]`
+- `PartialEq` and `PartialOrd` -> enabling `==, !=, <, >` operators
+- `Clone` and `Copy` -> creates deep copy of the variable
+- `Drop` and `Destruct` -> for moving variables out of scope
+- `Serde` serialization and deserialization
+- `starknet::Store`
 
